@@ -1,11 +1,3 @@
-
-service dhcp-service /system/bin/netcfg wlan0 dhcp
-        oneshot
-
-on property:dev.bootcomplete=1
-        stop dhcp-service
-        start dhcp-service
-
 on init
     insmod /lib/modules/fsr.ko
     insmod /lib/modules/fsr_stl.ko

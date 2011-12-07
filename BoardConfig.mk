@@ -24,6 +24,7 @@ LOCAL_PATH:= $(call my-dir)
 # against the traditional rules of inheritance).
 
 USE_CAMERA_STUB := false
+BOARD_USE_FROYO_LIBCAMERA := true
 TARGET_NO_BOOTLOADER := true
 
 TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/gio/prebuilt/recovery_kernel

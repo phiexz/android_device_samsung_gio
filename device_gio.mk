@@ -72,6 +72,7 @@ PRODUCT_COPY_FILES += \
 # Init
 PRODUCT_COPY_FILES += \
     device/samsung/gio/init.gt-s5660.rc:root/init.gt-s5660.rc \
+    device/samsung/gio/GIO.rle:root/GIO.rle \
     device/samsung/gio/ueventd.gt-s5660.rc:root/ueventd.gt-s5660.rc
 
 # Audio
@@ -86,8 +87,6 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/hostapd:system/bin/hostapd \
     device/samsung/gio/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf
     
-
-
 # Install the features available on this device.
 PRODUCT_COPY_FILES += \
     frameworks/base/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
@@ -105,8 +104,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/modules/sec_param.ko:root/lib/modules/sec_param.ko \
     device/samsung/gio/prebuilt/ar6000.ko:system/wifi/ar6000.ko \
     device/samsung/gio/prebuilt/cifs.ko:system/lib/modules/cifs.ko \
-    device/samsung/gio/prebuilt/tun.ko:system/lib/modules/cifs.ko \
-    device/samsung/gio/prebuilt/librasdioif.ko:system/lib/modules/cifs.ko \
+    device/samsung/gio/prebuilt/tun.ko:system/lib/modules/tun.ko \
+    device/samsung/gio/prebuilt/librasdioif.ko:system/lib/modules/librasdioif.ko \
     device/samsung/gio/prebuilt/zram.ko:system/lib/modules/zram.ko
     
 #Kernel Modules for Recovery (RFS)
