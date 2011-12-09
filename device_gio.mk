@@ -62,28 +62,31 @@ $(call inherit-product-if-exists, vendor/samsung/gio/gio-vendor.mk)
 DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/qwerty.kl:system/usr/keylayout/qwerty.kl \
-    device/samsung/gio/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl
+    device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
+    device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
+    device/samsung/gio/prebuilt/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
+    device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_jack.kl \
+    device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_key.kl   
 
 # fstab
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/vold.fstab:system/etc/vold.fstab
+    device/samsung/gio/prebuilt/vold.fstab:system/etc/vold.fstab
 
 # Init
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/init.gt-s5660.rc:root/init.gt-s5660.rc \
-    device/samsung/gio/GIO.rle:root/GIO.rle \
-    device/samsung/gio/ueventd.gt-s5660.rc:root/ueventd.gt-s5660.rc
+    device/samsung/gio/prebuilt/init.gt-s5660.rc:root/init.gt-s5660.rc \
+    device/samsung/gio/prebuilt/GIO.rle:root/GIO.rle \
+    device/samsung/gio/prebuilt/ueventd.gt-s5660.rc:root/ueventd.gt-s5660.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/AudioFilter.csv:system/etc/AudioFilter.csv \
-    device/samsung/gio/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
+    device/samsung/gio/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
+    device/samsung/gio/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
 
 # WLAN + BT
 PRODUCT_COPY_FILES += \
-	device/samsung/gio/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
-    device/samsung/gio/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
+    device/samsung/gio/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
+    device/samsung/gio/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/samsung/gio/prebuilt/hostapd:system/bin/hostapd \
     device/samsung/gio/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf
     
@@ -132,7 +135,7 @@ PRODUCT_COPY_FILES += \
 
 #Media profile
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/media_profiles.xml:system/etc/media_profiles.xml
+    device/samsung/gio/prebuilt/media_profiles.xml:system/etc/media_profiles.xml
 
 PRODUCT_PROPERTY_OVERRIDES := \
     keyguard.no_require_sim=true \

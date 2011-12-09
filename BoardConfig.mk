@@ -62,7 +62,7 @@ TARGET_USES_16BPPSURFACE_FOR_OPAQUE := true
 JS_ENGINE := v8
 
 # OpenGL drivers config file path
-BOARD_EGL_CFG := device/samsung/gio/egl.cfg
+BOARD_EGL_CFG := device/samsung/gio/prebuilt/egl.cfg
 
 ## to enable the GPS HAL
 BOARD_GPS_LIBRARIES := libloc_api
