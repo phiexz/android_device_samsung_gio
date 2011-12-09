@@ -121,17 +121,17 @@ PRODUCT_COPY_FILES += \
 
 #WiFi firmware
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/firmware/athtcmd_ram.bin:system/wifi/ath6k/AR6003/hw2.0/athtcmd_ram.bin \
-    device/samsung/gio/firmware/athwlan.bin.z77:system/wifi/ath6k/AR6003/hw2.0/athwlan.bin.z77 \
-    device/samsung/gio/firmware/bdata.SD31.bin:system/wifi/ath6k/AR6003/hw2.0/bdata.SD31.bin \
-    device/samsung/gio/firmware/bdata.SD31.bin.04:system/wifi/ath6k/AR6003/hw2.0/bdata.SD31.bin.04 \
-    device/samsung/gio/firmware/data.patch.bin:system/wifi/ath6k/AR6003/hw2.0/data.patch.bin \
-    device/samsung/gio/firmware/otp.bin.z77:system/wifi/ath6k/AR6003/hw2.0/otp.bin.z77
+    device/samsung/gio/prebuilt/athtcmd_ram.bin:system/wifi/ath6k/AR6003/hw2.0/athtcmd_ram.bin \
+    device/samsung/gio/prebuilt/athwlan.bin.z77:system/wifi/ath6k/AR6003/hw2.0/athwlan.bin.z77 \
+    device/samsung/gio/prebuilt/bdata.SD31.bin:system/wifi/ath6k/AR6003/hw2.0/bdata.SD31.bin \
+    device/samsung/gio/prebuilt/bdata.SD31.bin.04:system/wifi/ath6k/AR6003/hw2.0/bdata.SD31.bin.04 \
+    device/samsung/gio/prebuilt/data.patch.bin:system/wifi/ath6k/AR6003/hw2.0/data.patch.bin \
+    device/samsung/gio/prebuilt/otp.bin.z77:system/wifi/ath6k/AR6003/hw2.0/otp.bin.z77
     
 #GPU firmware
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/firmware/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
-    device/samsung/gio/firmware/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw
+    device/samsung/gio/prebuilt/yamato_pm4.fw:system/etc/firmware/yamato_pm4.fw \
+    device/samsung/gio/prebuilt/yamato_pfp.fw:system/etc/firmware/yamato_pfp.fw
 
 #Media profile
 PRODUCT_COPY_FILES += \
