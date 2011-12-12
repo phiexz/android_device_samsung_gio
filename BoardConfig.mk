@@ -82,6 +82,8 @@ BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
 
+BOARD_CUSTOM_USB_CONTROLLER := ../../device/samsung/gio/UsbController.cpp
+
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 8388608
