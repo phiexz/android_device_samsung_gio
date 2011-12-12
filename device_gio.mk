@@ -62,6 +62,12 @@ $(call inherit-product-if-exists, vendor/samsung/gio/gio-vendor.mk)
 DISABLE_DEXPREOPT := false
 
 PRODUCT_COPY_FILES += \
+    device/samsung/gio/prebuilt/abtfilt:system/bin/abtfilt \
+    device/samsung/gio/prebuilt/memsicd:system/bin/memsicd \
+    device/samsung/gio/prebuilt/qmuxd:system/bin/qmuxd \
+    device/samsung/gio/prebuilt/wlan_mac:system/bin/wlan_mac \
+    device/samsung/gio/prebuilt/wlan_tool:system/bin/wlan_tool \
+    device/samsung/gio/prebuilt/wmiconfig:system/bin/wmiconfig \
     device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
     device/samsung/gio/prebuilt/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
