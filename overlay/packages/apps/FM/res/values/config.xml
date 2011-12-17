@@ -4,7 +4,7 @@
     <bool name="require_bt">true</bool>
 
     <!-- Whether or not output to speaker is supported -->
-    <bool name="speaker_supported">false</bool>
+    <bool name="speaker_supported">true</bool>
 
     <!-- Whether or not seek is supported -->
     <bool name="seek_supported">true</bool>

@@ -103,7 +103,7 @@
          pull the phone out of your pocket.)  So devices that *don't* want
          this behavior should set this flag to false via the resource
          overlay.  -->
-    <bool name="allow_back_key_to_reject_incoming_call">true</bool>
+    <bool name="allow_back_key_to_reject_incoming_call">false</bool>
 
     <!-- If true, show an onscreen "Dial" button in the dialer.
          In practice this is used on all platforms even the ones with hard SEND/END
@@ -117,6 +117,6 @@
     <bool name="send_mic_mute_to_AudioManager">true</bool>
 
     <!-- Determines if device implements a noise suppression device for in call audio-->
-    <bool name="has_in_call_noise_suppression">false</bool>
+    <bool name="has_in_call_noise_suppression">true</bool>
 
 </resources>

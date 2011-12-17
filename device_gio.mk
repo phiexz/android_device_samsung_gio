@@ -34,26 +34,19 @@ PRODUCT_DEVICE := gio
 PRODUCT_MODEL := GT-S5660
 
 PRODUCT_PACKAGES += \
-    LiveWallpapers \
-    LiveWallpapersPicker \
-    VisualizationWallpapers \
-    MagicSmokeWallpapers \
-    VisualizationWallpapers \
     librs_jni \
     Gallery3d \
-    SpareParts \
-    Development \
-    Term \
     libOmxCore \
     libOmxVidEnc \
-    FM \
     make_ext4fs \
     brcm_patchram_plus \
     sec_touchscreen.kcm \
     copybit.gio \
     lights.gio \
     gralloc.gio \
+    gps.gio \
     setup_fs \
+    FM \
     dexpreopt
 
 # proprietary side of the device
@@ -80,9 +73,9 @@ PRODUCT_COPY_FILES += \
 
 # Init
 PRODUCT_COPY_FILES += \
-    device/samsung/gio/prebuilt/init.gt-s5660.rc:root/init.gt-s5660.rc \
+    device/samsung/gio/prebuilt/init.gt-s5660v.rc:root/init.gt-s5660v.rc \
     device/samsung/gio/prebuilt/GIO.rle:root/GIO.rle \
-    device/samsung/gio/prebuilt/ueventd.gt-s5660.rc:root/ueventd.gt-s5660.rc
+    device/samsung/gio/prebuilt/ueventd.gt-s5660v.rc:root/ueventd.gt-s5660v.rc
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -174,7 +167,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.media.dec.jpeg.memcap=20000000 \
     dalvik.vm.lockprof.threshold=500 \
     dalvik.vm.dexopt-flags=m=y \
-    dalvik.vm.heapsize=32m \
+    dalvik.vm.heapsize=48m \
     dalvik.vm.execution-mode=int:jit \
     dalvik.vm.dexopt-data-only=1 \
     ro.opengles.version=131072  \
