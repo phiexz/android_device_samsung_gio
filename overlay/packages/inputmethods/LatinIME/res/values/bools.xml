@@ -19,5 +19,5 @@
 -->
 <resources>
     <!-- Whether or not auto-correction should be enabled by default -->
-    <bool name="enable_autocorrect">true</bool>
+    <bool name="enable_autocorrect">false</bool>
 </resources>

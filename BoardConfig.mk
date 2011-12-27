@@ -23,7 +23,7 @@ LOCAL_PATH:= $(call my-dir)
 # variant, so that it gets overwritten by the parent (which goes
 # against the traditional rules of inheritance).
 
-USE_CAMERA_STUB := true
+USE_CAMERA_STUB:= true
 TARGET_NO_BOOTLOADER := true
 
 TARGET_PREBUILT_RECOVERY_KERNEL := device/samsung/gio/prebuilt/recovery_kernel
@@ -36,7 +36,7 @@ TARGET_CPU_ABI2 := armeabi
 
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno200
 TARGET_BOOTLOADER_BOARD_NAME := gio
-TARGET_OTA_ASSERT_DEVICE := gio,GT-S5660,GT-S5660v,GT-S5660M,GT-S5660L
+TARGET_OTA_ASSERT_DEVICE := gio,GT-S5660,GT-S5660V,GT-S5660M,GT-S5660L
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
@@ -66,12 +66,13 @@ JS_ENGINE := v8
 BOARD_EGL_CFG := device/samsung/gio/prebuilt/egl.cfg
 
 ## to enable the GPS HAL
-BOARD_GPS_LIBRARIES := libloc_api
 BOARD_USES_QCOM_HARDWARE := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_USES_QCOM_GPS := true
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := gio
-BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 50000
+BOARD_VENDOR_QCOM_GPS_LOC_API_AMSS_VERSION := 1240
+BOARD_GPS_LIBRARIES := libloc_api
+BOARD_GPS_NEEDS_XTRA := true
 
 BOARD_MOBILEDATA_INTERFACE_NAME = "pdp0"
 
@@ -83,8 +84,6 @@ BOARD_CUSTOM_USB_CONTROLLER := ../../device/samsung/gio/UsbController.cpp
 BOARD_USE_USB_MASS_STORAGE_SWITCH := true
 
 BOARD_UMS_LUNFILE := "/sys/devices/platform/usb_mass_storage/lun0/file"
-
-BOARD_CUSTOM_USB_CONTROLLER := ../../device/samsung/gio/UsbController.cpp
 
 # fix this up by examining /proc/mtd on a running device
 BOARD_BOOTIMAGE_PARTITION_SIZE := 8388608

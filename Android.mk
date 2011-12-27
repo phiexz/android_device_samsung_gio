@@ -17,7 +17,7 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),gio)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := prebuilt/sec_touchscreen.kcm
+LOCAL_SRC_FILES := sec_touchscreen.kcm
 LOCAL_MODULE_TAGS := optional
 include $(BUILD_KEY_CHAR_MAP)
 

@@ -86,11 +86,12 @@ static int snd_device = -1;
 static uint32_t SND_DEVICE_CURRENT=-1;
 static uint32_t SND_DEVICE_HANDSET=-1;
 static uint32_t SND_DEVICE_SPEAKER=-1;
+static uint32_t SND_DEVICE_FORCE_SPEAKER=-1;
 static uint32_t SND_DEVICE_MEDIA_SPEAKER=-1;
 static uint32_t SND_DEVICE_BT=-1;
-static uint32_t SND_DEVICE_BT_NSEC_OFF=-1;
+static uint32_t SND_DEVICE_BT_NSEC_OFF=32; // really DEVICE_BT_NSEC_OFF
 static uint32_t SND_DEVICE_HEADSET=-1;
-static uint32_t SND_DEVICE_HEADSET_AND_SPEAKER=-1;
+static uint32_t SND_DEVICE_HEADSET_AND_SPEAKER=26; // really FORCE_SPEAKER
 static uint32_t SND_DEVICE_IN_S_SADC_OUT_HANDSET=-1;
 static uint32_t SND_DEVICE_IN_S_SADC_OUT_HEADSET=-1;
 static uint32_t SND_DEVICE_IN_S_SADC_OUT_SPEAKER_PHONE=-1;
@@ -99,7 +100,7 @@ static uint32_t SND_DEVICE_TTY_HCO=-1;
 static uint32_t SND_DEVICE_TTY_VCO=-1;
 static uint32_t SND_DEVICE_CARKIT=-1;
 static uint32_t SND_DEVICE_FM_SPEAKER=-1;
-static uint32_t SND_DEVICE_FM_HEADSET=17;
+static uint32_t SND_DEVICE_FM_HEADSET=17; // really IN_S_SADC_OUT_HEADSET
 static uint32_t SND_DEVICE_NO_MIC_HEADSET=-1;
 // ----------------------------------------------------------------------------
 
@@ -143,7 +144,10 @@ AudioHardware::AudioHardware() :
                 CHECK_FOR(TTY_HEADSET);
                 CHECK_FOR(TTY_HCO);
                 CHECK_FOR(TTY_VCO);
+#ifdef HAVE_FM_RADIO
                 CHECK_FOR(FM_SPEAKER);
+                CHECK_FOR(FM_HEADSET);
+#endif
 #undef CHECK_FOR
             }
         }
@@ -1133,7 +1137,7 @@ status_t AudioHardware::setVoiceVolume(float v)
         v = 1.0;
     }
 
-    int vol = lrint(v * 5.0);
+    int vol = lrint(v * 7.0);
     LOGD("setVoiceVolume(%f)\n", v);
     LOGI("Setting in-call volume to %d (available range is 0 to 7)\n", vol);
 
@@ -1151,7 +1155,7 @@ status_t AudioHardware::setVoiceVolume(float v)
 status_t AudioHardware::setMasterVolume(float v)
 {
     Mutex::Autolock lock(mLock);
-    int vol = ceil(v * 5.0);
+    int vol = ceil(v * 7.0);
     LOGI("Set master volume to %d.\n", vol);
     set_volume_rpc(SND_DEVICE_HANDSET, SND_METHOD_VOICE, vol, m7xsnddriverfd);
     set_volume_rpc(SND_DEVICE_MEDIA_SPEAKER, SND_METHOD_VOICE, vol, m7xsnddriverfd);
@@ -1162,15 +1166,30 @@ status_t AudioHardware::setMasterVolume(float v)
     set_volume_rpc(SND_DEVICE_IN_S_SADC_OUT_HANDSET, SND_METHOD_VOICE, vol, m7xsnddriverfd);
     set_volume_rpc(SND_DEVICE_IN_S_SADC_OUT_HEADSET, SND_METHOD_VOICE, vol, m7xsnddriverfd);
     set_volume_rpc(SND_DEVICE_IN_S_SADC_OUT_SPEAKER_PHONE, SND_METHOD_VOICE, vol, m7xsnddriverfd);
-#ifdef HAVE_FM_RADIO
-    set_volume_rpc(SND_DEVICE_FM_SPEAKER, SND_METHOD_VOICE, vol, m7xsnddriverfd);;
-    set_volume_rpc(SND_DEVICE_FM_HEADSET, SND_METHOD_VOICE, vol, m7xsnddriverfd);
-#endif
     // We return an error code here to let the audioflinger do in-software
     // volume on top of the maximum volume that we set through the SND API.
     // return error - software mixer will handle it
     return -1;
 }
+
+#ifdef HAVE_FM_RADIO
+status_t AudioHardware::setFmVolume(float v)
+{
+    unsigned int VolValue = (unsigned int)(AudioSystem::logToLinear(v));
+    int volume = (unsigned int)(VolValue*VolValue/100);
+
+    char volhex[10] = "";
+    sprintf(volhex, "0x%x ", volume);
+    char volreg[100] = "hcitool cmd 0x3f 0x15 0xf8 0x0 ";
+
+    strcat(volreg, volhex);
+    strcat(volreg, "0");
+
+    system(volreg);
+
+    return NO_ERROR;
+}
+#endif
 
 static status_t do_route_audio_rpc(uint32_t device,
                                    bool ear_mute, bool mic_mute, int m7xsnddriverfd)
@@ -1198,17 +1217,7 @@ static status_t do_route_audio_rpc(uint32_t device,
      */
     struct msm_snd_device_config args;
     args.device = device;
-#ifdef HAVE_FM_RADIO
-    if(args.device == SND_DEVICE_FM_HEADSET){
-	    args.ear_mute = SND_MUTE_UNMUTED;
-    }else if(args.device == SND_DEVICE_FM_SPEAKER){
-           args.ear_mute = SND_MUTE_UNMUTED;
-    }else{
-	    args.ear_mute = ear_mute ? SND_MUTE_MUTED : SND_MUTE_UNMUTED;
-    }
-#else
     args.ear_mute = ear_mute ? SND_MUTE_MUTED : SND_MUTE_UNMUTED;
-#endif
     if((device != SND_DEVICE_CURRENT) && (!mic_mute)) {
         //Explicitly mute the mic to release DSP resources
         args.mic_mute = SND_MUTE_MUTED;
@@ -1235,7 +1244,7 @@ status_t AudioHardware::doAudioRouteOrMute(uint32_t device)
         if (mBluetoothId) {
             device = mBluetoothId;
         } else if (!mBluetoothNrec) {
-            device = SND_DEVICE_BT_NSEC_OFF;
+            device = SND_DEVICE_BT_EC_OFF;
         }
     }
 #endif
@@ -1252,7 +1261,7 @@ status_t AudioHardware::doAudioRouteOrMute(uint32_t device)
     }
 
 #ifdef HAVE_FM_RADIO
-    if(mFmRadioEnabled && (device == SND_DEVICE_FM_HEADSET)) {
+    if(mFmRadioEnabled && (device == SND_DEVICE_FM_HEADSET || device == SND_DEVICE_FM_SPEAKER)) {
       mute = 0;
       LOGI("unmute for radio");
     }
@@ -1854,8 +1863,8 @@ status_t AudioHardware::AudioStreamInMSM72xx::set(
     mSampleRate = config.sample_rate;
     mBufferSize = config.buffer_size;
     }
-    else if( (*pFormat == AudioSystem::AMR_NB))
-           {
+    else if(*pFormat == AudioSystem::AMR_NB)
+      {
 
       // open vocie memo input device
       status = ::open(VOICE_MEMO_DEVICE, O_RDWR);
@@ -1915,6 +1924,7 @@ status_t AudioHardware::AudioStreamInMSM72xx::set(
           mBufferSize = 320;
           break;
         }
+
 
         default:
         break;

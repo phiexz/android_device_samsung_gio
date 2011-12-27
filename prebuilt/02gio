@@ -1,0 +1,61 @@
+#!/system/bin/sh
+
+chown 0:0 /system/xbin/su
+chmod 6755 /system/xbin/su
+
+# Tweak drives for better speed
+
+READ_AHEAD_KB="256";
+NR_REQUESTS="128";
+DRIVES="stl12
+stl13
+stl14"
+for DRIVE in $DRIVES;
+do
+	echo $NR_REQUESTS > /sys/block/$DRIVE/queue/nr_requests;
+	echo $READ_AHEAD_KB > /sys/block/$DRIVE/queue/read_ahead_kb;
+	echo 0 > /sys/block/$DRIVE/queue/rotational;
+done;
+
+READ_AHEAD_KB="256";
+NR_REQUESTS="128";
+DRIVES="mmcblk0"
+for DRIVE in $DRIVES;
+do
+	#echo deadline > /sys/block/$DRIVE/queue/scheduler;
+	echo $NR_REQUESTS > /sys/block/$DRIVE/queue/nr_requests;
+	echo $READ_AHEAD_KB > /sys/block/$DRIVE/queue/read_ahead_kb;
+	echo 0 > /sys/block/$DRIVE/queue/rotational;
+	echo 1 > /sys/block/$DRIVE/queue/iosched/fifo_batch;
+done;
+
+# Activate swap
+if [ "$(cat /proc/partitions | grep mmcblk0p3)" != "" ]; then
+	swapon /dev/block/mmcblk0p3
+fi
+
+# Activate compcache (using new sysctl method; not supported officially by CyanogenMod?)
+if getprop | grep persist.service.compcache; then
+	COMPCACHE=`getprop persist.service.compcache`
+else
+	COMPCACHE=`getprop ro.compcache.default`
+fi
+
+if [ "$COMPCACHE" -ne "0" ]; then
+	COMPCACHERAM=$((184 * $COMPCACHE / 100))
+	insmod /system/lib/modules/zram.ko
+	echo 1 > /sys/block/zram0/reset
+	echo $(($COMPCACHERAM*1024*1024)) > /sys/block/zram0/disksize
+	mkswap /dev/block/zram0
+	swapon /dev/block/zram0
+fi
+
+#patch simple2ext's script to prevent filesystem corruption
+S2ECONFIG="/data/local/s2e_config/.mounts_ext4"
+if [ -f $S2ECONFIG ];
+then
+	# remove dangerous tune2fs tweaks
+	sed -i -e 's/ tune2fs -/ #tune2fs -/g' -e 's/ e2fsck/ #e2fsck/g' \
+	-e 's/-o commit=19,barrier=0,nobh,nouser_xattr,errors=continue,noatime,nodiratime,nosuid,nodev,data=writeback//g' $S2ECONFIG
+fi
+

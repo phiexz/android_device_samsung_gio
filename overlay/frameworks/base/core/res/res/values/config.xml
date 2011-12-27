@@ -27,63 +27,8 @@
     <bool name="config_animateScreenLights">false</bool>
 
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
-
-    <!-- Array of light sensor LUX values to define our levels for auto backlight brightness support.
-         The N entries of this array define N + 1 zones as follows:
-
-         Zone 0:        0 <= LUX < array[0]
-         Zone 1:        array[0] <= LUX < array[1]
-         ...
-         Zone N:        array[N - 1] <= LUX < array[N]
-         Zone N + 1:    array[N] <= LUX < infinity
-
-         Must be overridden in platform specific overlays 
-    <integer-array name="config_autoBrightnessLevels">
-        <item>200</item>
-        <item>400</item>
-        <item>1000</item>
-        <item>3000</item>
-    </integer-array> -->
-
-    <!-- Array of output values for LCD backlight corresponding to the LUX values
-         in the config_autoBrightnessLevels array.  This array should have size one greater
-         than the size of the config_autoBrightnessLevels array.
     
-    <integer-array name="config_autoBrightnessLcdBacklightValues">
-        <item>35</item>
-        <item>55</item>
-        <item>70</item>
-        <item>90</item>
-        <item>210</item>
-    </integer-array> -->
-
-    <!-- Array of output values for button backlight corresponding to the LUX values
-         in the config_autoBrightnessLevels array.  This array should have size one greater
-         than the size of the config_autoBrightnessLevels array.
-    
-    <integer-array name="config_autoBrightnessButtonBacklightValues">
-        <item>255</item>
-        <item>255</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-    </integer-array> -->
-
-    <!-- Array of output values for keyboard backlight corresponding to the LUX values
-         in the config_autoBrightnessLevels array.  This array should have size one greater
-         than the size of the config_autoBrightnessLevels array.
-    
-    <integer-array name="config_autoBrightnessKeyboardBacklightValues">
-        <item>5</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-        <item>0</item>
-    </integer-array> -->
-    
-    <!-- Component name of the default wallpaper. This will be ImageWallpaper if not 
-         specified -->
-    <string name="default_wallpaper_component">com.android.wallpaper/.nexus.NexusWallpaper</string>
+    <bool name="config_batterySdCardAccessibility">true</bool>
 
     <integer name="config_deskDockKeepsScreenOn">0</integer>
     <integer name="config_carDockKeepsScreenOn">1</integer>
@@ -119,14 +64,19 @@
          USB interfaces.  If the device doesn't want to support tething over USB this should
          be empty.  An example would be "usb.*" -->
     <string-array translatable="false" name="config_tether_usb_regexs">
+      <item>"usb\\d"</item>
     </string-array>
 
     <!-- Regex array of allowable upstream ifaces for tethering - for example if you want
          tethering on a new interface called "foo2" add <item>"foo\\d"</item> to the array -->
     <string-array translatable="false" name="config_tether_upstream_regexs">
         <item>"pdp\\d"</item>
+	<item>"rmnet\\d"</item>
         <item>"wlan\\d"</item>
     </string-array>
+    
+    <!-- The default iface on which to monitor data use 
+    <string name="config_datause_iface">pdp0</string> -->
 
     <!-- List of regexpressions describing the interface (if any) that represent tetherable
          Wifi interfaces.  If the device doesn't want to support tethering over Wifi this
@@ -135,9 +85,11 @@
         <item>"athap0"</item>
     </string-array>
 
+    <!-- Component name of the service providing network location support. -->
+    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
 
-    <!-- Boolean indicating if we require the use of DUN on mobile for tethering -->
-    <bool translatable="false" name="config_tether_dun_required">false</bool>
+    <!-- Component name of the service providing geocoder API support. -->
+    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
 
     <!-- Vibrator pattern for a very short but reliable vibration for soft keyboard tap -->
     <integer-array name="config_keyboardTapVibePattern">
