@@ -20,7 +20,7 @@
 #include "common.h"
 #include "extendedcommands.h"
 
-char* MENU_HEADERS[] = { "Use vol keys to highlight",
+char* MENU_HEADERS[] = { "Use volume keys to highlight",
                          " and home to select.",
                          NULL };
 

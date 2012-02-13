@@ -24,17 +24,11 @@
          config_hardware_automatic_brightness_available is not set, so we will use software implementation -->
     <bool name="config_automatic_brightness_available">false</bool>
 
-    <bool name="config_animateScreenLights">false</bool>
+    <bool name="config_animateScreenLights">true</bool>
 
     <bool name="config_disableMenuKeyInLockScreen">true</bool>
     
     <bool name="config_batterySdCardAccessibility">true</bool>
-
-    <integer name="config_deskDockKeepsScreenOn">0</integer>
-    <integer name="config_carDockKeepsScreenOn">1</integer>
-
-    <!-- Default blink frequency for notification LED is 9 seconds. -->
-    <integer name="config_defaultNotificationLedOff">9000</integer>
 
     <!-- Component name of the service providing network location support. -->
     <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
@@ -95,4 +89,18 @@
     <integer-array name="config_keyboardTapVibePattern">
         <item>30</item>
     </integer-array>
+    
+    <!-- Tablet mode -->
+    <bool name="cm_default_is_tablet">true</bool>
+    <bool name="cm_default_has_soft_buttons">true</bool>
+    <bool name="cm_default_soft_buttons_left">true</bool>
+    <bool name="cm_default_show_soft_home">false</bool>
+    <bool name="cm_default_show_soft_menu">false</bool>
+    <bool name="cm_default_show_soft_back">false</bool>
+    <bool name="cm_default_show_soft_search">false</bool>
+    <bool name="cm_default_show_soft_quick_na">false</bool>
+    <integer name="cm_default_unhide_button_index">0</integer>
+    
+    <!-- test -->
+    <bool name="config_enableScreenOnAnimation">true</bool>
 </resources>

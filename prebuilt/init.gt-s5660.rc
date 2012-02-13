@@ -18,16 +18,16 @@ on fs
     write /sys/devices/virtual/block/stl12/queue/read_ahead_kb 4
     write /sys/devices/virtual/block/stl13/queue/read_ahead_kb 4
     write /sys/devices/virtual/block/stl14/queue/read_ahead_kb 4
-
+    
 on boot
 # cpufreq configurations
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor ondemand
-    write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold 95
-    write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/down_differential 3
+    write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/up_threshold 90
+    write /sys/devices/system/cpu/cpufreq/ondemand/down_threshold 30
     write /sys/devices/system/cpu/cpu0/cpufreq/ondemand/sampling_rate 50000
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 122880
     write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 787200
-
+    
 # Setup bluetooth
     setprop ro.bt.bdaddr_path "/data/.nvmac_bt.info"
     #mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
@@ -94,6 +94,7 @@ on boot
     chown system radio /sys/devices/virtual/touch/firmware/firmware
     chmod 0664 /sys/devices/virtual/touch/firmware/firmware
     chown system radio /sys/devices/virtual/touch/firmware/firmware_ret
+    chmod 0664 /sys/class/usb_composite/rndis/enable
     
 # for silent reset
     chown system system /proc/dump_enable
@@ -144,7 +145,6 @@ service dhcp-service /system/bin/netcfg wlan0 dhcp
     oneshot
 
 on property:dev.bootcomplete=1
-    stop hciattach
     stop dhcp-service
     start dhcp-service
 
@@ -160,6 +160,18 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dawext -W -w -iwlan0 -c/data/
 service dhcpcd_wlan0 /system/bin/dhcpcd -BKL
     disabled
     oneshot
+    
+service iprenew_wlan0 /system/bin/dhcpcd -n
+    disabled
+    oneshot
+
+service bdaddr_read /system/bin/bdaddr_read
+    user root
+    disabled
+    oneshot
+    
+on property:init.svc.bootanim=running
+    start bdaddr_read
 
 service hostapd /system/bin/hostapd /data/misc/wifi/hostapd.conf
     socket hostapd_athap0 dgram 660 wifi wifi
@@ -176,7 +188,13 @@ service hciattach /system/bin/brcm_patchram_plus --enable_hci --enable_lpm --bau
     group bluetooth net_bt_admin
     disabled
     oneshot
-
+    
+service setup_fs /system/bin/setup_fs /dev/block/stl13 /dev/block/stl14
+    user root
+    group root
+    oneshot
+    disabled
+    
 service gps-daemon /system/bin/gpsd
     user system
     group system inet

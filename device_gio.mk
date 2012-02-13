@@ -31,7 +31,6 @@ DEVICE_PACKAGE_OVERLAYS := device/samsung/gio/overlay
 PRODUCT_PACKAGES += \
     librs_jni \
     libOmxCore \
-    libOmxVidEnc \
     make_ext4fs \
     brcm_patchram_plus \
     sec_touchscreen.kcm \
@@ -42,6 +41,14 @@ PRODUCT_PACKAGES += \
     setup_fs \
     FM \
     SamsungServiceMode \
+    rzscontrol \
+    bdaddr_read \
+    dump_image \
+    e2fsck \
+    setup_fs \
+    erase_image \
+    flash_image \
+    screencap \
     dexpreopt
 
 # proprietary side of the device
@@ -57,6 +64,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/02gio:system/etc/init.d/02gio \
     device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
+    device/samsung/gio/prebuilt/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+    device/samsung/gio/prebuilt/sec_key.kl:system/usr/keylayout/sec_key.kl
   
 
 # fstab
@@ -153,7 +162,7 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 
 # This should not be needed but on-screen keyboard uses the wrong density without it.
 PRODUCT_PROPERTY_OVERRIDES += \
-    qemu.sf.lcd_density=160
+    qemu.sf.lcd_density=160 \
     hw.keyboards.0.devname=qwerty
 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -168,6 +177,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.dexopt-data-only=1 \
     ro.opengles.version=131072  \
     ro.compcache.default=0
+    
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
