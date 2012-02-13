@@ -1,0 +1,6 @@
+*~
+*.o
+*.old
+.version
+.directory
+.mailmap
