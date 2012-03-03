@@ -4,9 +4,10 @@ on init
     insmod /lib/modules/sec_param.ko
 
 on fs
-    mount ext4 /dev/block/stl12 /system ro wait noatime nodiratime noauto_da_alloc
-    mount ext4 /dev/block/stl13 /data wait nosuid nodev noatime nodiratime noauto_da_alloc
-    mount ext4 /dev/block/stl14 /cache wait nosuid nodev noatime nodiratime noauto_da_alloc
+    mount ext4 /dev/block/stl12 /system wait rw
+    mount ext4 /dev/block/stl12 /system wait ro remount
+    mount ext4 /dev/block/stl13 /data wait nosuid nodev
+    mount ext4 /dev/block/stl14 /cache wait nosuid nodev
 
     chown radio /dev/bml7
     chown radio /dev/bml10
@@ -30,7 +31,7 @@ on boot
     
 # Setup bluetooth
     setprop ro.bt.bdaddr_path "/data/.nvmac_bt.info"
-    #mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
+    mkdir /data/misc/bluetooth 0770 bluetooth bluetooth
     chown bluetooth bluetooth /sys/module/bluetooth_power/parameters/power
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
