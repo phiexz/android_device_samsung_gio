@@ -205,12 +205,17 @@ service memsicd /system/bin/memsicd
     group system
     oneshot
 
-#fix mac address by subpsyke
-service get_macaddrs /system/bin/get_macaddrs
-    user root
+service wlan_mac /system/bin/wlan_mac
+    user system
+    group system net_raw net_admin inet
     oneshot
+
+service wlan_tool /system/bin/wlan_tool
     disabled
+    oneshot
 
-on property:init.svc.ril-daemon=running
-    start get_macaddrs
-
+service abtfilt /system/bin/abtfilt -d -z -n -v -b -s
+    user bluetooth
+    group system bluetooth net_bt_admin inet
+    disabled
+    oneshot

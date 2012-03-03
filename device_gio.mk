@@ -88,7 +88,8 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/wpa_supplicant.conf:system/etc/wifi/wpa_supplicant.conf \
     device/samsung/gio/prebuilt/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
     device/samsung/gio/prebuilt/hostapd:system/bin/hostapd \
-    device/samsung/gio/prebuilt/get_macaddrs:system/bin/get_macaddrs \
+    device/samsung/gio/prebuilt/wlan_mac:system/bin/wlan_mac \
+    device/samsung/gio/prebuilt/wlan_tool:system/bin/wlan_tool \
     device/samsung/gio/prebuilt/hostapd.conf:system/etc/wifi/hostapd.conf
     
 # Hardware
