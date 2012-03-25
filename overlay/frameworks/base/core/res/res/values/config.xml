@@ -100,7 +100,4 @@
     <bool name="cm_default_show_soft_search">false</bool>
     <bool name="cm_default_show_soft_quick_na">false</bool>
     <integer name="cm_default_unhide_button_index">0</integer>
-    
-    <!-- test -->
-    <bool name="config_enableScreenOnAnimation">true</bool>
 </resources>
