@@ -179,6 +179,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072  \
     ro.compcache.default=0
     
+# Audio attenuation
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.sys.fm-attn=0 \
+    persist.sys.headset-attn=0 \
+    persist.sys.speaker-attn=6
+    
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
