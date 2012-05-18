@@ -60,6 +60,7 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/abtfilt:system/bin/abtfilt \
     device/samsung/gio/prebuilt/memsicd:system/bin/memsicd \
     device/samsung/gio/prebuilt/qmuxd:system/bin/qmuxd \
+    device/samsung/gio/prebuilt/racoon:system/bin/racoon \
     device/samsung/gio/prebuilt/wmiconfig:system/bin/wmiconfig \
     device/samsung/gio/prebuilt/02gio:system/etc/init.d/02gio \
     device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
