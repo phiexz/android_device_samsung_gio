@@ -33,7 +33,6 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     make_ext4fs \
     brcm_patchram_plus \
-    sec_touchscreen.kcm \
     copybit.gio \
     lights.gio \
     gralloc.gio \
@@ -49,7 +48,10 @@ PRODUCT_PACKAGES += \
     erase_image \
     flash_image \
     screencap \
-    dexpreopt
+    dexpreopt \
+    sec_touchscreen.kcm \
+    sec_jack.kcm \
+    sec_key.kcm
 
 # proprietary side of the device
 $(call inherit-product-if-exists, vendor/samsung/gio/gio-vendor.mk)
@@ -64,9 +66,9 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/wmiconfig:system/bin/wmiconfig \
     device/samsung/gio/prebuilt/02gio:system/etc/init.d/02gio \
     device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
-    device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
-    device/samsung/gio/prebuilt/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-    device/samsung/gio/prebuilt/sec_key.kl:system/usr/keylayout/sec_key.kl
+    device/samsung/gio/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
+    device/samsung/gio/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
+    device/samsung/gio/sec_key.kl:system/usr/keylayout/sec_key.kl
   
 
 # fstab
