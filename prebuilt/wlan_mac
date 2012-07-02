@@ -29,6 +29,23 @@ if ! ls /data/.nvmac.info; then
     echo `getprop ril.wifi_macaddr` > /data/.nvmac.info
 fi
 
+#get & write bt mac_addr
+if ! ls /data/.nvmac_bt.info; then
+    while true; do
+        case `getprop ril.bt_macaddr` in
+        "")
+#        $SYSLOG "Still waiting for mac property"
+        sleep 1
+        ;;
+        *)
+        break
+        ;;
+        esac            
+    done
+    $SYSLOG "Generate mac file" `getprop ril.bt_macaddr`
+    echo `getprop ril.bt_macaddr` | sed 's!^M$!!;s!\-!!g;s!\.!!g;s!\(..\)!\1:!g;s!:$!!' > /data/.nvmac_bt.info
+fi
+
 mv /data/log/ar6k.log /data/log/ar6k.previous.log
 recEvent --logfile=/data/log/ar6k.log --binary --reclimit=10000& 
 
