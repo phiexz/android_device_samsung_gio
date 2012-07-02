@@ -33,7 +33,6 @@ PRODUCT_PACKAGES += \
     libOmxCore \
     make_ext4fs \
     brcm_patchram_plus \
-    sec_touchscreen.kcm \
     copybit.gio \
     lights.gio \
     gralloc.gio \
@@ -63,11 +62,15 @@ PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/racoon:system/bin/racoon \
     device/samsung/gio/prebuilt/wmiconfig:system/bin/wmiconfig \
     device/samsung/gio/prebuilt/02gio:system/etc/init.d/02gio \
+    device/samsung/gio/prebuilt/AVRCP.kl:system/usr/keylayout/AVRCP.kl \
     device/samsung/gio/prebuilt/qwerty.kl:system/usr/keylayout/qwerty.kl \
     device/samsung/gio/prebuilt/sec_touchscreen.kl:system/usr/keylayout/sec_touchscreen.kl \
     device/samsung/gio/prebuilt/sec_jack.kl:system/usr/keylayout/sec_jack.kl \
-    device/samsung/gio/prebuilt/sec_key.kl:system/usr/keylayout/sec_key.kl
-  
+    device/samsung/gio/prebuilt/sec_key.kl:system/usr/keylayout/sec_key.kl \
+    device/samsung/gio/prebuilt/sec_key.kcm.bin:system/usr/keychars/sec_key.kcm.bin \
+    device/samsung/gio/prebuilt/sec_touchscreen.kcm.bin:system/usr/keychars/sec_touchscreen.kcm.bin \
+    device/samsung/gio/prebuilt/qwerty.kcm.bin:system/usr/keychars/qwerty.kcm.bin \
+    device/samsung/gio/prebuilt/qwerty2.kcm.bin:system/usr/keychars/qwerty2.kcm.bin
 
 # fstab
 PRODUCT_COPY_FILES += \
