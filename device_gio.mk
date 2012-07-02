@@ -155,10 +155,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=60 \
     ro.com.android.dataroaming=false
 
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.sf.lcd_density=160 
-
-
 # we have enough storage space to hold precise GC data
 PRODUCT_TAGS += dalvik.gc.type-precise
 
