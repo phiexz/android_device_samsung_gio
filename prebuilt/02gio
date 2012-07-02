@@ -1,5 +1,10 @@
 #!/system/bin/sh
 
+#active all modules
+insmod /system/lib/modules/cifs.ko
+insmod /system/lib/modules/tun.ko
+insmod /system/lib/modules/zram.ko
+
 # Activate swap
 if [ "$(cat /proc/partitions | grep mmcblk0p3)" != "" ]; then
 	swapon /dev/block/mmcblk0p3
