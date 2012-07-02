@@ -29,7 +29,7 @@
 #ifndef __MSM_AUDIO_VOICEMEMO_H
 #define __MSM_AUDIO_VOICEMEMO_H
 
-#include <"msm_audio.h">
+#include "msm_audio.h"
 
 #define AUDIO_GET_VOICEMEMO_CONFIG _IOW(AUDIO_IOCTL_MAGIC, \
 (AUDIO_MAX_COMMON_IOCTL_NUM+0), unsigned)
