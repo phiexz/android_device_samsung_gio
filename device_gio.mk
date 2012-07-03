@@ -186,6 +186,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.headset-attn=0 \
     persist.sys.speaker-attn=0
     
+# Some egl tweak
+PRODUCT_PROPERTY_OVERRIDES += \
+    debug.sf.hw=1 \
+    debug.composition.type=gpu \
+    windowsmgr.max_events_per_sec=280 \
+    debug.performance.tuning=1 \
+    video.accelerate.hw=1 \
+    persist.android.strictmode=0 \
+    ro.min_pointer_dur=1
+    
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
 # of the aspects that require proprietary drivers that aren't
