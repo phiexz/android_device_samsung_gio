@@ -151,7 +151,7 @@ service wpa_supplicant /system/bin/wpa_supplicant -Dawext -W -w -iwlan0 -c/data/
     disabled
     oneshot
 
-service dhcpcd_wlan0 /system/bin/dhcpcd -BKL
+service dhcpcd_wlan0 /system/bin/dhcpcd -ABK
     disabled
     oneshot
     
