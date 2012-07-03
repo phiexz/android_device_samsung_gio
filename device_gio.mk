@@ -85,6 +85,7 @@ PRODUCT_COPY_FILES += \
 # Audio
 PRODUCT_COPY_FILES += \
     device/samsung/gio/prebuilt/AudioFilter.csv:system/etc/AudioFilter.csv \
+    device/samsung/gio/prebuilt/audio_effects.conf:system/etc/audio_effects.conf \
     device/samsung/gio/prebuilt/AutoVolumeControl.txt:system/etc/AutoVolumeControl.txt
 
 # WLAN + BT
