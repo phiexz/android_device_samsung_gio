@@ -183,7 +183,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     persist.sys.fm-attn=0 \
     persist.sys.headset-attn=0 \
-    persist.sys.speaker-attn=6
+    persist.sys.speaker-attn=0
     
 # See comment at the top of this file. This is where the other
 # half of the device-specific product definition file takes care
